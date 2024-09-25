@@ -5,10 +5,10 @@ pub fn add<T: Copy + Add<Output = T>>(lhs: T, rhs: T) -> T {
 }
 
 pub fn sum<T: Copy + Add<Output = T>>(summands: &Vec<T>) -> T {
-    let mut sum = summands[0];
-    for summand in summands.iter().skip(1) {
-        sum = add(sum, summand.to_owned());
-    }
+    let sum = summands
+        .iter()
+        .skip(1)
+        .fold(summands[0], |lhs, rhs| add(lhs, *rhs));
 
     sum
 }
