@@ -4,9 +4,9 @@ pub fn add<T: Copy + Add<Output = T>>(lhs: T, rhs: T) -> T {
     lhs + rhs
 }
 
-pub fn sum<T: Copy + Add<Output = T>>(summands: &[T]) -> T {
+pub fn sum<T: Copy + Add<Output = T>>(summands: &Vec<T>) -> T {
     let mut sum = summands[0];
-    for (_, summand) in summands.iter().enumerate().filter(|(i, _)| *i != 0) {
+    for summand in summands.iter().skip(1) {
         sum = add(sum, summand.to_owned());
     }
 
@@ -27,7 +27,7 @@ mod tests {
 
     #[test]
     fn test_sum() {
-        let nums = [1, 2, 3, 4];
+        let nums = vec![1, 2, 3, 4];
 
         assert_eq!(sum(&nums), 10);
     }
