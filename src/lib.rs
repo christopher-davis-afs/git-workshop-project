@@ -1,5 +1,7 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+use std::ops::Add;
+
+pub fn add<T: Copy + Add<Output = T>>(lhs: T, rhs: T) -> T {
+    lhs + rhs
 }
 
 #[cfg(test)]
@@ -7,8 +9,10 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn test_add() {
+        let first_num = 2;
+        let num_to_add = 1;
+
+        assert_eq!(add(first_num, num_to_add), 3);
     }
 }
